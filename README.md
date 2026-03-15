@@ -1,8 +1,6 @@
 # Asoul-Today-of-that-year
 一个简单的asoul动态那年今日推送小系统
-没问题，我们把机器人提醒地址的多样化选择以及未来的更新预告都加进去。这样不仅能让 README 看起来更专业，还能给 Fork 的人一些期待。
 
-这是为你优化后的 README.md（方案 A 增强版）：
 
 🌟 A-SOUL 动态追踪系统 (Today of That Year)
 
