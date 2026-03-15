@@ -1,0 +1,39 @@
+name: AsoulDaily
+
+on:
+  schedule:
+    # cron 是格林威治时间。'0 2 * * *' 代表北京时间早上 10:00
+    - cron: '0 2 * * *'
+  workflow_dispatch: # 在 Actions 页面手动点击运行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+
+      - name: 设置 Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 安装依赖
+        run: pip install requests
+
+      - name: 运行爬虫和推送
+        env:
+          # 这两行是把你在 Settings 里设的密码传给 Python 代码
+          BI_COOKIE: ${{ secrets.BI_COOKIE }}
+          PUSH_URL: ${{ secrets.PUSH_URL }}
+        run: |
+          python main.py
+          python push.py
+
+      - name: 自动保存数据库
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add dynamic.db
+          git commit -m "Update DB [skip ci]" || exit 0
+          git push
