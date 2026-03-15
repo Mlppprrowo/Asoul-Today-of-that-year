@@ -3,10 +3,7 @@ import time
 import random
 import database
 import os
-try:
-    import config  # 尝试导入本地的 config
-except ImportError:
-    config = None
+
 
 
 # 创建全局会话对象
@@ -17,7 +14,7 @@ URL = "https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/space"
 
 
 def crawl(mid, name):
-    cookie_str = os.environ.get("BI_COOKIE") or (config.COOKIE if config else "")
+    cookie_str = os.environ.get("BI_COOKIE") 
     # 动态生成 Headers，确保 Referer 随用户 UID 改变
     current_headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
