@@ -57,6 +57,10 @@ def crawl(mid, name):
 
             for item in items:
                 dynamic_id = item["id_str"]
+                if database.is_exists(dynamic_id): # 如果数据库里已经有这个 ID 
+                    print(">>> 检测到重复动态，抓取已完成！")
+                    return # 直接跳出整个 crawl 函数，结束这个成员的抓取
+                dynamic_id = item["id_str"]
                 dynamic_type = item["type"]
 
                 # 提取时间
