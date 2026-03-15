@@ -19,8 +19,7 @@ def insert_dynamic(id, user, pub_time, content, img_urls=None):
         "INSERT OR IGNORE INTO dynamic (id, user, pub_time, content, img_urls) VALUES (?,?,?,?,?)",
         (id, user, pub_time, content, img_urls)
     )
-
-conn.commit()
+    conn.commit()
 
 # 判断数据库里 有没有这条动态
 def exists(dynamic_id):
