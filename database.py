@@ -25,3 +25,12 @@ def insert_dynamic(id, user, pub_time, content, img_urls=None):
 def exists(dynamic_id):
     cursor.execute("SELECT 1 FROM dynamic WHERE id=?", (dynamic_id,))
     return cursor.fetchone() is not None
+
+def is_exists(dynamic_id):
+    conn = sqlite3.connect('dynamic.db')
+    cursor = conn.cursor()
+    # 查询该 ID 是否已存在
+    cursor.execute("SELECT 1 FROM dynamics WHERE id_str = ? LIMIT 1", (dynamic_id,))
+    result = cursor.fetchone()
+    conn.close()
+    return result is not None
